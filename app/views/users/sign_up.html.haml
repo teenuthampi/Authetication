@@ -1,0 +1,37 @@
+#login-popup{:role => "dialog"}
+  .login-page
+    .head
+      .form-title{:style => "padding: 20.1% 0;"}
+        .logo-top
+          %h1 Register
+        .logo-bottom
+        
+      .login
+        .sap_tabs
+          #horizontalTab{:style => "display: block; width: 100%; margin: 0px;"}
+            %ul.resp-tabs-list
+              %li.resp-tab-item{:role => "tab"}
+                %span Register
+              .clearfix
+            .resp-tabs-container
+              .tab-1.resp-tab-content{"aria-labelledby" => "tab_item-0"}
+                .login-top
+                  = form_for(@user,  :url => new_customer_path) do |f|
+                    = f.text_field :name, :class => "name active" ,:placeholder => "Your Name", :required => "true"
+                    = f.text_field :email, :class => "email" ,:placeholder => "Email", :required => "true"
+                    = f.text_field :mobile_number, :class => "email" ,:placeholder => "Mobile Number", :required => "true"
+                    = f.password_field :password, :class => "password" ,:placeholder => "Password", :required => "true"
+                    = f.password_field :password_confirmation, :class => "password" ,:placeholder => "Password Confirmation", :required => "true"
+                    .login-bottom.login-bottom2
+                      .submit
+                        %button.btn-green{:type => "submit", :value => "submit"} Register
+                      .clear
+      .clear
+    .account
+      %ul
+        %li
+          %p
+            %a{:href => root_path} ← Back to
+        .clear
+    .footer
+      %p Copyright © 2017,  All Rights Reserved

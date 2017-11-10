@@ -1,0 +1,33 @@
+#login-popup{:role => "dialog"}
+  .login-page
+    .head
+      .form-title
+        .logo-top
+          %h1 Login
+        .logo-bottom
+      .login
+        .sap_tabs
+          #horizontalTab{:style => "display: block; width: 100%; margin: 0px;"}
+            %ul.resp-tabs-list
+              %li.resp-tab-item{:role => "tab"}
+                %span Login
+              .clearfix
+            .resp-tabs-container
+              .tab-1.resp-tab-content{"aria-labelledby" => "tab_item-0"}
+                .login-top
+                  = form_for(@user,  :url => new_login_customer_path, :validate => true) do |f|
+                    = f.text_field :email, :class => "email" ,:placeholder => "Email", :required => "true"
+                    = f.password_field :password, :class => "password" ,:placeholder => "Password", :required => "true"
+                    .login-bottom.login-bottom1
+                      .submit
+                        %a.btn-green{:href => sign_up_path} Register
+                        %button.btn-green.sign-in-btn{:type => "submit", :value => "LOGIN"} Login
+                      .clear
+      .clear
+    .account
+      %ul
+        %li
+          %p= link_to "← Back to", root_path
+        .clear
+    .footer
+      %p Copyright © 2017,  All Rights Reserved

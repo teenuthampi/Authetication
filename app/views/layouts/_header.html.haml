@@ -1,0 +1,21 @@
+%body
+  %header
+    .top-head
+      .container
+        .row
+          .col-lg-12
+            %ul.notification-list
+              %ul.top_nav
+                %li
+                  = link_to root_path do
+                    = "Logo"
+                %li.login-nav
+                  - if user_signed_in?
+                    %a
+                      Hi, #{current_user.email}
+                    = image_tag "login-icon.png"
+                  - if user_signed_in?
+                    %ul.account-menu
+                      %li
+                        = link_to "Logout", destroy_user_session_path
+  / header-end

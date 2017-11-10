@@ -1,0 +1,23 @@
+.edit-profile
+  .container
+    .row
+      .col-sm-12
+        .profile-area
+          .col-md-12
+            .panel.panel-default
+              .panel-heading
+                %br/
+                %h4 Users List
+              .panel-body
+                .box-body.table-responsive.no-padding
+                  %table.table.table-hover
+                    %tr
+                      %th{:width => "30%"} Email
+                      %th{:width => "30%"} Name
+                      %th{:width => "30%"} Phone Number 
+                    - @users.each_with_index do |user,index|
+                      %tr{:id => "content_#{user.id}"}
+                        %td= user.email
+                        %td= user.name
+                        %td= user.mobile_number
+                          

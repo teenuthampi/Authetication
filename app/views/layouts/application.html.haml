@@ -1,0 +1,62 @@
+!!!
+%html
+  %head
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+    %title Authetication
+    = csrf_meta_tags
+    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
+    = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
+    %meta{:content => "width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no", :name => "viewport"}/
+    %link{:href => "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css", :rel => "stylesheet"}/
+    %link{:href => "https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css", :rel => "stylesheet"}/
+    %link{:href => "https://fonts.googleapis.com/css?family=Titillium+Web", :rel => "stylesheet"}/
+    = stylesheet_link_tag 'bootstrap.min'
+    = stylesheet_link_tag 'font-awesome'
+    = stylesheet_link_tag 'menumaker'
+    = stylesheet_link_tag 'style'
+    = javascript_include_tag 'jquery.min'
+    = javascript_include_tag 'bootstrap.min'
+    = javascript_include_tag 'easyResponsiveTabs.js'
+    = javascript_include_tag 'ie.js'
+    = javascript_include_tag 'jquery.flexisel'
+    = javascript_include_tag 'jquery.validate.js'
+    = javascript_include_tag 'menumaker'
+  :css
+    .alert {
+        padding: 0 !important;
+      }
+      .alert a {
+        text-decoration: none;
+      }
+        .alert-notice {
+          position: absolute;
+          width: 100%;
+          text-align: center;
+          top: 0;
+        }
+        .alert-notice p {    
+        font-size: 16px;
+        width: 500px;
+        margin: 0 auto;
+        padding: 15px;
+        margin-bottom: 20px;
+        border: 1px solid transparent;
+        border-radius: 4px;
+        text-align: left;
+    }
+  %body
+    - flash.each do |key, value|
+      %div{:class => "alert alert-#{key}"}
+        %p
+          %a.close{"aria-label" => "close", "data-dismiss" => "alert", :href => "#", :title => "close"} ×
+          = value
+    = yield
+    = javascript_include_tag 'custom'
+:javascript
+  $(document).ready(function () {
+      $('#horizontalTab').easyResponsiveTabs({
+          type: 'default', //Types: default, vertical, accordion           
+          width: 'auto', //auto or any width like 600px
+          fit: true   // 100% fit in a container
+      });
+  });
