@@ -15,5 +15,4 @@ class User < ApplicationRecord
     save!
     UserMailer.login_mail(self).deliver
   end
-
 end

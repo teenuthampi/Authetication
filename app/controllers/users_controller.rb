@@ -33,10 +33,10 @@ class UsersController < ApplicationController
 		@user = User.new(user_params)
 	  	if @user.save
 	  		@user.send_confirmation_email
-	  		flash[:notice] = 'You have been registered successfully. Please login to your email to confirm your account.'
+	  		flash[:notice] = 'You have been registered successfully. Please login to your email to verify your account.'
 	    	redirect_to "/verification/#{@user.id}"
 	  	else
-	  		flash[:notice] = "Invalid Credentials, Email might be taken already"
+	  		flash[:notice] = "Invalid Credentials"
 	      render :sign_up 
 	  	end
 	end
@@ -56,6 +56,14 @@ class UsersController < ApplicationController
    else
      redirect_to "/verification/#{@user.id}"
      flash[:notice] = "Please enter the correct Verification Code."
+    end
+  end
+
+  def check_email
+      email_ids = User.pluck(:email)
+      @boolean_value = email_ids.include?(params[:user][:email])
+      respond_to do |format|
+      format.json { render :json => !@boolean_value }
     end
   end
 

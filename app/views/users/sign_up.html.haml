@@ -1,7 +1,7 @@
 #login-popup{:role => "dialog"}
   .login-page
     .head
-      .form-title{:style => "padding: 20.1% 0;"}
+      .form-title{:style => "padding: 26.1% 0;"}
         .logo-top
           %h1 Register
         .logo-bottom
@@ -19,7 +19,7 @@
                   = form_for(@user,  :url => new_customer_path) do |f|
                     = f.text_field :name, :class => "name active" ,:placeholder => "Your Name", :required => "true"
                     = f.text_field :email, :class => "email" ,:placeholder => "Email", :required => "true"
-                    = f.text_field :mobile_number, :class => "email" ,:placeholder => "Mobile Number", :required => "true"
+                    = f.text_field :mobile_number, :class => "name" ,:placeholder => "Mobile Number", :required => "true"
                     = f.password_field :password, :class => "password" ,:placeholder => "Password", :required => "true"
                     = f.password_field :password_confirmation, :class => "password" ,:placeholder => "Password Confirmation", :required => "true"
                     .login-bottom.login-bottom2
@@ -35,3 +35,64 @@
         .clear
     .footer
       %p Copyright © 2017,  All Rights Reserved
+
+:javascript
+  $(function(){
+  $("#new_user").validate({
+        rules:{
+          'user[name]':
+            {
+            required: true
+          },
+          'user[mobile_number]':
+            {
+            required: true,
+          minlength:10
+          },
+          'user[email]':
+            {
+            required:true,
+            email:true,
+            remote:'check_email'
+          },
+          'user[password]':
+            {
+            required: true,
+            minlength :8
+          },
+          'user[password_confirmation]':
+            {
+            required: true,
+            equalTo: "#user_password"
+          }
+        },
+  
+        messages:{
+          'user[name]':
+            {
+            required:"Please enter First name"
+          },
+          'user[mobile_number]':
+            {
+           required:"Please enter phone number",
+          minlength:"Please enter 10 digit number"
+          },
+          'user[email]':
+            {
+            required:"Please enter Email",
+            email: "correct email address",
+            remote :"Email has been already taken."
+          },
+  
+          'user[password]':
+            {
+            required:"Please enter new password",
+            minlength:"Minimum 8 characters"
+          },
+          'user[password_confirmation]':
+            {
+            required:"Please enter confirm password"
+          }
+        }
+      });
+    });
