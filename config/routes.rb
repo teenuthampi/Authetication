@@ -14,9 +14,6 @@ Rails.application.routes.draw do
   match '/sign_up_user' => 'users#new_customer', :via => :post, :as => :new_customer
   get '/verification/:id' => 'users#verification', :via => :get, :as => :verification
   match '/email_confirmation/:id'=> 'users#email_confirmation',:via => [:patch, :put], :as => :email_confirmation
-  get '/password-reset' => 'users#password_reset', :via => :get, :as => :password_reset
-  match '/reset-password' => 'users#reset_password', :via => :post, :as => :reset_password
-  get '/password-change/:token' => 'users#password_change', :via => :get, :as => :password_change
-  match '/update-password/:token' => 'users#update_password_with_token', :via => [:post, :put], :as => :update_password_with_token
-
+  match '/upload_image/:id'=> 'dashboard#upload_image',:via => [:patch, :put,:post], :as => :upload_image
+  delete'/dashboard/remove_image/:id' => 'dashboard#remove_image', as: :remove_image
 end

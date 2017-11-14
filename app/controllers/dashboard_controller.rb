@@ -7,4 +7,24 @@ class DashboardController < ApplicationController
    @users = User.all
   end
 
- end
+
+  def upload_image
+		@user = User.where(:id => params[:user][:id]).first
+		if !@user.image.exists?
+			@updated_image = @user.update_attributes(:image => params["user"]["image"])
+		  redirect_to request.referer
+		  flash[:notice] = "You have uploaded the profile picture for #{@user.name} successfully"
+		else
+			flash[:error] = "Please upload the profile picture"
+    end
+  end
+
+
+	def remove_image     
+   user = User.where(id: params[:id]).first 
+   user.image.destroy
+   redirect_to request.referer
+   flash[:notice] = "You have changed the profile picture for #{user.name}, Please upload the new picture."
+	end
+
+end

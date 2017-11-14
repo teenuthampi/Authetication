@@ -13,7 +13,11 @@
                   - if user_signed_in?
                     %a
                       Hi, #{current_user.email}
-                    = image_tag "login-icon.png"
+                    - if current_user.image.exists?
+                      = image_tag (current_user.image.url),  :width=>"30", :height=>"30",  :alt=>"Profile Pic"
+                    - else
+                      = image_tag "login-icon.png"
+
                   - if user_signed_in?
                     %ul.account-menu
                       %li
