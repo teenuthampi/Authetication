@@ -6151,3 +6151,9 @@ ul.top_nav li.login-nav>a {
 .alert .close:hover {
   opacity: 1;
 }
+.btn.btn-danger{
+margin-left: 322px;
+opacity: -104px;
+position: absolute;
+margin-top: -34px;
+}

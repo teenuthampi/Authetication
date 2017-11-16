@@ -24,8 +24,35 @@
                         %td= user.mobile_number 
                         %td
                           - if user.image.exists?
-                            = link_to remove_image_path(user.id), method: :delete do
-                              = image_tag user.image.url(:thumb)
+                            %button #{image_tag user.image.url(:thumb)}
+                            .test{:style => "display: none"}
+                              = form_for(user, :url => upload_image_path(user.id), :html => { :method => "patch", :multipart => true, :class => "form-horizontal"}) do |f|
+                                = f.hidden_field :id ,:value => user.id
+                                = f.file_field :image, :placeholder => "Upload Profile Pic", :class=> "upload"
+                                = f.submit("Upload Picture", :class=>'btn btn-primary',:style => "margin-left:200px;")
+                              = link_to  remove_image_path(user.id),method: :delete, data: {confirm: 'Are you sure you want to delete?' } do
+                                %button.btn.btn-danger{:type => "button"} Delete
+                                
+                              :javascript
+                                $(function(){
+                                  $("#edit_user_#{user.id}").validate({
+                                    rules:{
+                                      'user[image]':
+                                      {
+                                        required: true
+                                      },
+                                    },
+                                    messages:{
+                                      'user[image]':
+                                      {
+                                        required:"Please choose the picture & upload"
+                                      }
+                                    }
+                                  });
+                                });
+
+
+                            
                             %td
                           - else
                             = form_for(user, :url => upload_image_path(user.id), :html => { :method => "patch", :multipart => true, :class => "form-horizontal"}) do |f|
@@ -52,3 +79,10 @@
                                   });
                                 });
                         %td
+
+:javascript
+  var flip = 0;
+  $( "button" ).click(function() {
+    $(".test" ).toggle( flip++ % 2 === 0 );
+  });
+
